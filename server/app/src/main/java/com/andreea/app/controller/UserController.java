@@ -23,7 +23,7 @@ public class UserController {
 
     /**
      * test function
-      * @return
+      * @return ResponseEntity
      */
     @GetMapping("/users")
     public ResponseEntity<ApiResponse> test() {

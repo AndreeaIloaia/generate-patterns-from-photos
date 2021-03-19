@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
  * Clasa folosita pentru a trimite detaliile despre login in body-ul request-ului
  * campuri: usernameOrEmail - String folosit pentru login, poate sa fie ori username-ul, ori email-ul utilizatorului
  *          password - String pentru parola
- * @NotBlank - adnotare care verifica sa nu fie un string gol sau null
+ * NotBlank - adnotare care verifica sa nu fie un string gol sau null
  */
 public class LoginRequest {
     @NotBlank

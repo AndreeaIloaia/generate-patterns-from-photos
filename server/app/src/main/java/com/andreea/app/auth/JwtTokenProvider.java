@@ -24,7 +24,7 @@ public class JwtTokenProvider {
 
     /**
      * genereaza un token pe baza informatiilor unei cereri de autentificare
-     * @param authentication
+     * @param authentication - Authentication
      * @return String - un token creat pe baza unui algoritm de criptare dupa o cheie
      *                  care contine id-ul utilizatorului, data crearii si data de expirare
      */
@@ -58,7 +58,7 @@ public class JwtTokenProvider {
 
     /**
      * Valideaza daca token-ul este inca valid
-     * @param authToken
+     * @param authToken - String
      * @return true - daca token-ul e valid
      *         false - altfel
      */

@@ -33,11 +33,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     /**
      * Extrage informatiile din token si le retine in SecurityContext
-     * @param request
-     * @param response
-     * @param filterChain
-     * @throws ServletException
-     * @throws IOException
+     * @param request - HttpServletRequest
+     * @param response - HttpServletResponse
+     * @param filterChain - FilterChain
+     * @throws ServletException - doFilter arunca aceasta exceptie
+     * @throws IOException - doFilter arunca aceasta exceptie
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

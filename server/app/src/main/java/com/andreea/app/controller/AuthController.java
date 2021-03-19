@@ -47,8 +47,8 @@ public class AuthController {
     /**
      * Metoda login folosing username/email si parola
      * Nu e nevoie de explicitarea rolului in request
-     * @param loginRequest
-     * @return ResponseEntity<ApiResponse> cu
+     * @param loginRequest - LoginRequest
+     * @return ResponseEntity
      */
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -74,8 +74,8 @@ public class AuthController {
     /**
      * Metoda register pentru a inregistra un nou utilizator, dandu-se username-ul, email-ul, parola si daca este admin
      * Nu e nevoie de explicitarea rolului in request
-     * @param signUpRequest
-     * @return ResponseEntity<ApiResponse> cu
+     * @param signUpRequest - SignUpRequest
+     * @return ResponseEntity
      */
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {

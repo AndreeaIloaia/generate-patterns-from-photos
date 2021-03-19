@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      * Functie folosita in WebSecurityConfigurerAdapter
      * @param usernameOrEmail - String care reprezinta username-ul sau email-ul utilizatorului
      * @return UserDetails
-     * @throws UsernameNotFoundException
+     * @throws UsernameNotFoundException - daca nu exista niciun user
      */
     @Override
     @Transactional

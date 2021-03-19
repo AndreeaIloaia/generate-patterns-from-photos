@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Interfata care implementeaza JpaRepository
  * Persistence layer
- * Lucreaza cu baza de date
+ * Lucreaza cu baza de date, cu tabelul user
  */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
