@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="03182021_create_pattern" author="andreeai">
+        <sql>CREATE TYPE type_pattern AS ENUM ('FRONT','BACK')</sql>
+        <createTable tableName="pattern">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="type" type="type_pattern">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03272021_add_garment_fk" author="andreeai">
+        <addColumn tableName="pattern">
+            <column name="garment_fk" type="int">
+                <constraints foreignKeyName="fk_garment_pattern" referencedTableName="garment"
+                             referencedColumnNames="id" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="03292021_drop_constraints" author="andreeai">
+        <dropUniqueConstraint tableName="pattern" uniqueColumns="type" constraintName="pattern_type_key"/>
+    </changeSet>
+
+    <changeSet id="03292021_remove_type" author="andreeai">
+        <dropColumn tableName="pattern">
+            <column name="type" type="type_pattern"/>
+        </dropColumn>
+        <addColumn tableName="pattern">
+            <column name="type" type="varchar(20)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="03292021_drop_constraints_name" author="andreeai">
+        <dropUniqueConstraint tableName="pattern" uniqueColumns="name" constraintName="pattern_name_key"/>
+    </changeSet>
+</databaseChangeLog>

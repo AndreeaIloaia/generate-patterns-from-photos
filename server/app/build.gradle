@@ -16,7 +16,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	runtimeOnly 'org.postgresql:postgresql'
+//	runtimeOnly 'org.postgresql:postgresql'
+// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation group: 'junit', name: 'junit-dep', version: '4.8.2'

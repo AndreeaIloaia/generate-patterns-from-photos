@@ -4,6 +4,7 @@ import com.andreea.app.dtos.ApiResponse;
 import com.andreea.app.dtos.FileUploadResponse;
 import com.andreea.app.models.FileEntity;
 import com.andreea.app.service.FileServiceImplementation;
+import com.andreea.app.service.GarmentServiceImplementation;
 import jdk.jfr.Frequency;
 import liquibase.util.StreamUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,10 +39,14 @@ import java.util.zip.ZipOutputStream;
 public class FileController {
     @Autowired
     FileServiceImplementation fileServiceImplementation;
+    @Autowired
+    GarmentServiceImplementation garmentServiceImplementation;
 
 
-    public FileController(FileServiceImplementation fileServiceImplementation) {
+    public FileController(FileServiceImplementation fileServiceImplementation,
+                          GarmentServiceImplementation garmentServiceImplementation) {
         this.fileServiceImplementation = fileServiceImplementation;
+        this.garmentServiceImplementation = garmentServiceImplementation;
     }
 
     /**
@@ -49,16 +56,22 @@ public class FileController {
      * @return FileUploadResponse - contine numele fisierului si uri-ul
      * @throws IOException - daca apare vreo exceptie la salvare
      */
-    @PostMapping("/upload")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) throws Exception {
-        FileEntity fileEntity = fileServiceImplementation.upload(file);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/files/")
-                .path(String.valueOf(fileEntity.getId()))
-                .toUriString();
-
-        return new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
-                HttpStatus.OK);
+    @PostMapping("/upload/{typeGarment}")
+    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable String typeGarment) throws Exception {
+        try {
+            FileEntity fileEntity = fileServiceImplementation.upload(file);
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/files/")
+                    .path("/download/" + fileEntity.getFileName())
+//                .path(String.valueOf(fileEntity.getId()))
+                    .toUriString();
+            garmentServiceImplementation.saveGarment(typeGarment, "mama", fileEntity);
+            return new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**
@@ -122,6 +135,7 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename())
                 .body(resource);
     }
+
 
     /**
      * Descarca mai multe files intr-un zip

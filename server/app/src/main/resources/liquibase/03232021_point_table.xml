@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="03182021_create_point" author="andreeai">
+        <createTable tableName="point">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="x" type="float8[]">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="y" type="float8[]">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="pattern_fk" type="int">
+                <constraints foreignKeyName="fk_pattern_point" referencedTableName="pattern"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

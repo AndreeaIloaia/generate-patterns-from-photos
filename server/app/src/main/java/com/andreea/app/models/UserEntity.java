@@ -3,6 +3,8 @@ package com.andreea.app.models;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Modelul pentru un utilizator
@@ -23,6 +25,9 @@ public class UserEntity {
     @Column(name="is_admin")
     private boolean isAdmin;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "garment_fk")
+    private List<GarmentEntity> garments;
 
     public UserEntity() {
     }

@@ -105,4 +105,13 @@ public class FileServiceImplementation {
             throw new RuntimeException("the file doesn't exist or not readable");
         }
     }
+
+    public Long findByName(String fileName) throws Exception {
+        FileEntity file = fileRepository.findByFileName(fileName);
+        if(file == null) {
+            throw new Exception("No such file with this name");
+        }
+
+        return file.getId();
+    }
 }

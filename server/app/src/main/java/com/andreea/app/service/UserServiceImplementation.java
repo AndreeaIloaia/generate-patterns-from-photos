@@ -39,6 +39,15 @@ public class UserServiceImplementation {
     }
 
     /**
+     * Verifica daca exista vreun utilizator cu un id dat
+     * @param id - Long
+     * @return Optional<UserEntity> - daca exista un astfel de utilizator
+     */
+    public Optional<UserEntity> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    /**
      * Salveaza un nou user
      * @param userEntity - UserEntity
      * @return UserEntity - daca s-a salvat, null - altfel

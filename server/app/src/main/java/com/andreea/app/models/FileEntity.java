@@ -16,12 +16,18 @@ public class FileEntity {
     @Column(name = "filename")
     private String fileName;
 
-    @Lob
-    @Column(name = "content")
+    @Transient
     private byte[] content;
 
     @Column(name = "size")
     private int size;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private GarmentEntity garmentEntity;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @MapsId
+//    private GarmentEntity garmentEntity;
 
     public FileEntity() {
     }
