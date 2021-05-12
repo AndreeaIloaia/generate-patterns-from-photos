@@ -1,0 +1,46 @@
+<section>
+    <div class="container right-panel-active">
+        
+        <div class="container__form container--signin">
+            <form class="form" id="form2" ngNativeValidate>
+                <h1 class='login-title'>Login</h1>
+                <input type="text" class="input" id="usernameOrEmail" [(ngModel)]="usernameOrEmail" required name="usernameOrEmail" placeholder="username or email">    
+                <input type="password" class="input" id="password" [(ngModel)]="password" required name="password" placeholder="password">    
+                <input class="btn btn-container" (click)="login()" value="Login" type="submit"
+                          name="submitButton"/>
+            </form>
+        </div>
+
+        <div class="container__form container--signup">
+            <form class="form" id="form1" ngNativeValidate>
+                <h1 class='register-title'>Register</h1>
+                <input type="text" class="input" id="username" [(ngModel)]="username" required name="username" placeholder="username">    
+                <input type="text" class="input" id="email" [(ngModel)]="email" required name="email" placeholder="email">    
+                <input type="password" class="input" id="passwordRegister" [(ngModel)]="passwordRegister" required name="passwordRegister" placeholder="password">    
+                <input class="btn btn-container" (click)="register()" value="Register" type="submit"
+                name="submitButton"/>
+            </form>
+        </div>
+
+        <!-- <div class="container__form container--signin">
+            <form class="form" id="form2" ngNativeValidate>
+                <h1 class='login-title'>Login</h1>
+                <input type="text" class="input" id="usernameOrEmail" [(ngModel)]="usernameOrEmail" required name="usernameOrEmail" placeholder="username or email">    
+                <input type="password" class="input" id="password" [(ngModel)]="password" required name="password" placeholder="password">    
+                <input class="btn btn-container" (click)="login()" value="Login" type="submit"
+                          name="submitButton"/>
+            </form>
+        </div> -->
+
+        <div class="container__overlay">
+            <div class="overlay">
+                <div class="overlay__panel overlay--left">
+                    <button class="btn" id="signUp" (click)="removeClass()">Register</button>
+                </div>
+                <div class="overlay__panel overlay--right">
+                    <button class="btn" id="signIn"  (click)="addClass()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

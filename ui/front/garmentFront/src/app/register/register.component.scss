@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.container {
+  margin-top: 20px;
+  display: block;
+  border-radius: 15px;
+  background: white;
+  align-self: center;
+  overflow: hidden;
+  height: 500px;
+  box-sizing: border-box;
+  padding: 35px 50px 50px;
+  width: 50%;
+}
+
+.form-group {
+  padding-top: 60px;
+}
+
+.photo-logo {
+  border-radius: 60px;
+}
+
+.mb-4 {
+  text-align: center;
+}
+
+.buttonContainer {
+  padding-top: 10px;
+  align-self: center;
+}
+
+.btn {
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.loginInput {
+  position: relative;
+  margin: 20px;
+  border-top: 2px solid $background;
+}
+
+.form-control {
+  border: none;
+  outline: none;
+  line-height: 1.2;
+}
+
+.redirectRegister {
+  color: black;
+  font-size: small;
+}
+
+.redirect {
+  text-align: end;
+}

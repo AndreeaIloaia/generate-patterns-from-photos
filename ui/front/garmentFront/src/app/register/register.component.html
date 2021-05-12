@@ -1,0 +1,29 @@
+<section class='loginSection'>
+    <div class='container'>
+        <div class="row">
+            <div class='card'>
+                <form ngNativeValidate>
+                    <div class='login-logo mb-4'>
+                        <img class='photo-logo img-thumbnail' src="../../assets/loui.png" alt="loui.png"/>
+                    </div>
+                    <h1 class='mb-4 login-title'>Register</h1>
+                    <div class="form-group">
+                        <div class='loginInput wrap-input100 validate-input'>
+                            <input type="text" class="form-control" id="username" [(ngModel)]="username" required name="username" placeholder="username">    
+                        </div>
+                        <div class='loginInput'>
+                            <input type="password" class="form-control" id="password" [(ngModel)]="password" required name="password" placeholder="password">    
+                        </div>
+                    </div>
+                    <div class="form-group buttonContainer mb-4">
+                        <input class="btn" (click)="register()" value="Register" type="submit"
+                          name="submitButton"/>
+                    </div>
+                    <div class="redirect">
+                        <a href='/login' class="redirectRegister">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
