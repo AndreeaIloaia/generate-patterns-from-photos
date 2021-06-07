@@ -1,7 +1,9 @@
 package com.andreea.app.service;
 
 import com.andreea.app.models.FileEntity;
+import com.andreea.app.models.GarmentEntity;
 import com.andreea.app.repository.FileRepository;
+import com.andreea.app.repository.GarmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -57,7 +59,7 @@ public class FileServiceImplementation {
      */
     //TODO - erori, specificatii etc
     @Transactional
-    public FileEntity upload(MultipartFile file) throws Exception {
+    public FileEntity upload(MultipartFile file, GarmentEntity garmentEntity) throws Exception {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         int size = file.getBytes().length;
 
@@ -65,7 +67,7 @@ public class FileServiceImplementation {
         FileEntity searchFile = fileRepository.findByFileNameAndSize(fileName, size);
 
         if (searchFile == null) {
-            FileEntity ff = new FileEntity(fileName, file.getBytes(), size);
+            FileEntity ff = new FileEntity(fileName, file.getBytes(), size, garmentEntity);
             searchFile = fileRepository.save(ff);
         } else {
             throw new Exception("File already exists");
@@ -113,5 +115,10 @@ public class FileServiceImplementation {
         }
 
         return file.getId();
+    }
+
+    public String getFileNameForAGivenGarment(Long idGarment) {
+        FileEntity fileEntity = fileRepository.findFirstByGarmentEntityId(idGarment);
+        return fileEntity.getFileName();
     }
 }

@@ -56,23 +56,28 @@ public class FileController {
      * @return FileUploadResponse - contine numele fisierului si uri-ul
      * @throws IOException - daca apare vreo exceptie la salvare
      */
-    @PostMapping("/upload/{typeGarment}")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable String typeGarment) throws Exception {
-        try {
-            FileEntity fileEntity = fileServiceImplementation.upload(file);
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/files/")
-                    .path("/download/" + fileEntity.getFileName())
-//                .path(String.valueOf(fileEntity.getId()))
-                    .toUriString();
-            garmentServiceImplementation.saveGarment(typeGarment, "mama", fileEntity);
-            return new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
-                    HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
-                    HttpStatus.BAD_REQUEST);
-        }
-    }
+//    @PostMapping("/upload/{typeGarment}")
+//    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable String typeGarment) throws Exception {
+//        try {
+//            FileEntity fileEntity = fileServiceImplementation.upload(file);
+//            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                    .path("/api/files/")
+//                    .path("/download/" + fileEntity.getFileName())
+////                .path(String.valueOf(fileEntity.getId()))
+//                    .toUriString();
+//            try {
+//            garmentServiceImplementation.saveGarment(typeGarment, "mama", fileEntity);
+//            } catch (Exception e){
+//                return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
+//                        HttpStatus.BAD_REQUEST);
+//            }
+//            return new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
+//                    HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
+//                    HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     /**
      * Salveaza mai multe fisiere trimise prin endpoint
@@ -81,37 +86,37 @@ public class FileController {
      * @return List of ResponseEntity - daca totul decurge bine, se va returna o lista de FileUploadResponse (numele si uri-ul fiecare fisier
      * - altfel, o lista cu un element de tip ApiResponse cu success - false si mesajul corespunzator
      */
-    @PostMapping("/multiple/upload")
-    public List<ResponseEntity> multipleUpload(@RequestParam("files") MultipartFile[] files) {
-        //va exista o limita de fisiere care se pot incarca
-        List<ResponseEntity> response = new ArrayList<>();
-
-        if (files.length > 10) {
-            response.add(new ResponseEntity<>(new ApiResponse(false, "Too many files. Try with less than 10!"),
-                    HttpStatus.BAD_REQUEST));
-        } else {
-            Arrays.stream(files)
-                    .forEach(file -> {
-                        try {
-                            FileEntity fileEntity = fileServiceImplementation.upload(file);
-                            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                                    .path("/api/files/")
-                                    .path(String.valueOf(fileEntity.getId()))
-                                    .toUriString();
-                            response.add(new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
-                                    HttpStatus.OK));
-                        } catch (Exception e) {
-                            //TODO - mai vezi aici cum returnezi
-                            response.clear();
-                            response.add(new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
-                                    HttpStatus.BAD_REQUEST));
-//                            return response;
-                        }
-                    });
-        }
-
-        return response;
-    }
+//    @PostMapping("/multiple/upload/{idGarment}")
+//    public List<ResponseEntity> multipleUpload(@RequestParam("files") MultipartFile[] files, @PathVariable String idGarment) {
+//        //va exista o limita de fisiere care se pot incarca
+//        List<ResponseEntity> response = new ArrayList<>();
+//
+//        if (files.length > 10) {
+//            response.add(new ResponseEntity<>(new ApiResponse(false, "Too many files. Try with less than 10!"),
+//                    HttpStatus.BAD_REQUEST));
+//        } else {
+//            Arrays.stream(files)
+//                    .forEach(file -> {
+//                        try {
+//                            FileEntity fileEntity = fileServiceImplementation.upload(file, idGarment);
+//                            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                                    .path("/api/files/")
+//                                    .path(String.valueOf(fileEntity.getId()))
+//                                    .toUriString();
+//                            response.add(new ResponseEntity<>(new FileUploadResponse(fileEntity.getFileName(), fileDownloadUri),
+//                                    HttpStatus.OK));
+//                        } catch (Exception e) {
+//                            //TODO - mai vezi aici cum returnezi
+//                            response.clear();
+//                            response.add(new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
+//                                    HttpStatus.BAD_REQUEST));
+////                            return response;
+//                        }
+//                    });
+//        }
+//
+//        return response;
+//    }
 
     /**
      * Descarca un fisier dandu-se numele acestuia

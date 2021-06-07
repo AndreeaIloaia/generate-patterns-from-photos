@@ -15,7 +15,20 @@
             <column name="size" type="int">
                 <constraints unique="false"/>
             </column>
+            <column name="garment_fk" type="int">
+                <constraints foreignKeyName="fk_garment_file" referencedTableName="garment"
+                             referencedColumnNames="id" />
+            </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="04062021_add_constraint_autoincrement_file" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="file"/>
     </changeSet>
 
 </databaseChangeLog>

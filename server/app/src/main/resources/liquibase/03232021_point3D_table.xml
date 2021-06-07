@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="05282021_create_point3D" author="andreeai">
+        <createTable tableName="point3d">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="number" type="int"/>
+            <column name="x" type="float8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="y" type="float8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="z" type="float8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="garment_fk" type="int">
+                <constraints foreignKeyName="fk_garment_point3D" referencedTableName="garment"
+                             referencedColumnNames="id" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04062021_add_constraint_autoincrement_point3d" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="point3d"/>
+    </changeSet>
+
+</databaseChangeLog>

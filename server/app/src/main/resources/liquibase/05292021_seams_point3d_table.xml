@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="05292021_create_seam_point3d" author="andreeai">
+        <createTable tableName="seam_point3d">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="point_fk" type="int">
+                <constraints foreignKeyName="fk_point3d_seam" referencedTableName="point3d"
+                             referencedColumnNames="id" />
+            </column>
+            <column name="seam_fk" type="int">
+                <constraints foreignKeyName="fk_seam_point3d" referencedTableName="seam"
+                             referencedColumnNames="id" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04062021_add_constraint_autoincrement_seam_point3d" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="seam_point3d"/>
+    </changeSet>
+</databaseChangeLog>

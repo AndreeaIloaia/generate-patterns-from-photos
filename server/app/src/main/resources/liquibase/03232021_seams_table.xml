@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="05282021_create_seams" author="andreeai">
+        <createTable tableName="seam">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="number_seam" type="int">
+            </column>
+            <column name="garment_fk" type="int">
+                <constraints foreignKeyName="fk_garment_nodes" referencedTableName="garment"
+                             referencedColumnNames="id" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04062021_add_constraint_autoincrement_seam" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="seam"/>
+    </changeSet>
+</databaseChangeLog>

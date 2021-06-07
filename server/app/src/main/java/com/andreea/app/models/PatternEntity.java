@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "pattern", schema = "public")
 public class PatternEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

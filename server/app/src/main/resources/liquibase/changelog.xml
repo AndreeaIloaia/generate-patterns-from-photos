@@ -5,12 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="liquibase/03272021_garment_table.xml"/>
 
     <include file="liquibase/03092021_user_table.xml"/>
-<!--    <include file="liquibase/03182021_file_table.xml"/>-->
+    <include file="liquibase/03272021_garment_table.xml"/>
+
+    <!--    <include file="liquibase/03182021_file_table.xml"/>-->
     <include file="liquibase/03272021_file_table_changed.xml"/>
     <include file="liquibase/03272021_pattern_table.xml"/>
     <include file="liquibase/03232021_point_table.xml"/>
+    <include file="liquibase/03232021_point3D_table.xml"/>
+    <include file="liquibase/03232021_nodes_table.xml"/>
+    <include file="liquibase/03232021_seams_table.xml"/>
+    <include file="liquibase/05292021_seams_point3d_table.xml"/>
 
 </databaseChangeLog>

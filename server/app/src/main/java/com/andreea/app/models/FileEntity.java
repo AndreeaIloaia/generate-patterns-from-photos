@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name="file", schema = "public")
 public class FileEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
 
@@ -22,12 +22,10 @@ public class FileEntity {
     @Column(name = "size")
     private int size;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "garment_fk")
     private GarmentEntity garmentEntity;
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @MapsId
-//    private GarmentEntity garmentEntity;
+
 
     public FileEntity() {
     }
@@ -39,10 +37,11 @@ public class FileEntity {
         this.size = size;
     }
 
-    public FileEntity(String fileName, byte[] content, int size) {
+    public FileEntity(String fileName, byte[] content, int size, GarmentEntity garmentEntity) {
         this.fileName = fileName;
         this.content = content;
         this.size = size;
+        this.garmentEntity = garmentEntity;
     }
 
     public Long getId() {
@@ -76,4 +75,8 @@ public class FileEntity {
     public void setSize(int size) {
         this.size = size;
     }
+
+    public GarmentEntity getGarmentEntity() { return garmentEntity; }
+
+    public void setGarmentEntity(GarmentEntity garmentEntity) { this.garmentEntity = garmentEntity; }
 }

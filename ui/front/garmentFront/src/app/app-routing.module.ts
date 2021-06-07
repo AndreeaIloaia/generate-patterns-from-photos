@@ -4,6 +4,8 @@ import { AuthtestComponent } from './authtest/authtest.component';
 import { DrawComponent } from './draw/draw.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PatternComponent } from './pattern/pattern.component';
+import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth/auth_guard.service';
 
@@ -27,8 +29,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   }, 
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
+  }, 
+  {
     path: 'draw',
     component: DrawComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'patterns',
+    component: PatternComponent,
     canActivate: [AuthGuardService]
   }, 
   {

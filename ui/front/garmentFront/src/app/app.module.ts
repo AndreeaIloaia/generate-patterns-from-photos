@@ -17,6 +17,8 @@ import { AuthtestComponent } from './authtest/authtest.component';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressComponent } from './draw/progress/progress.component';
+import { PatternComponent } from './pattern/pattern.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ProgressComponent } from './draw/progress/progress.component';
     AuthtestComponent,
     NavComponent,
     ProgressComponent,
+    PatternComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

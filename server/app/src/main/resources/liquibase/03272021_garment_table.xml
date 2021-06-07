@@ -5,50 +5,27 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <changeSet id="03182021_create_garment" author="andreeai">
-        <sql>CREATE TYPE type_garment AS ENUM ('ROCHIE', 'BLUZA', 'PANTALONI', 'FUSTA')</sql>
         <createTable tableName="garment">
             <column name="id" type="int">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="type" type="type_garment">
-                <constraints unique="true" nullable="false"/>
+            <column name="type" type="varchar(20)">
+                <constraints nullable="false"/>
             </column>
-            <column name="client" type="varchar(255)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-
-        </createTable>
-    </changeSet>
-
-    <changeSet id="03272021_add_user_fk" author="andreeai">
-        <addColumn tableName="garment">
             <column name="user_fk" type="int">
                 <constraints foreignKeyName="fk_user_garment" referencedTableName="user"
                              referencedColumnNames="id" />
             </column>
-        </addColumn>
+        </createTable>
     </changeSet>
 
-    <changeSet id="03292021_remove_type" author="andreeai">
-        <dropColumn tableName="garment">
-            <column name="type" type="type_garment"/>
-        </dropColumn>
-        <addColumn tableName="garment">
-            <column name="type" type="varchar(20)"/>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="03292021_drop_constraints" author="andreeai">
-        <dropUniqueConstraint tableName="garment" uniqueColumns="client" constraintName="garment_client_key"/>
-    </changeSet>
-
-    <changeSet id="03292021_add_file_fk" author="andreeai">
-        <addColumn tableName="garment">
-            <column name="file_fk" type="int">
-                <constraints foreignKeyName="fk_file_garment" referencedTableName="file"
-                             referencedColumnNames="id" />
-            </column>
-        </addColumn>
+    <changeSet id="04062021_add_constraint_autoincrement_garment" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="garment"/>
     </changeSet>
 
 </databaseChangeLog>

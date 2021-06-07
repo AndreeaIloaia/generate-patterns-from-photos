@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { URL_LOCAL } from '../utils'
+import { Graph } from 'src/app/model/graph';
 
 const URL : string = URL_LOCAL;
 
@@ -20,8 +21,29 @@ export class PatternService {
   postFile(fileToUpload: File, typeGarment: string): Observable<any> {
     const url = `${URL}files/upload/${typeGarment}`;
     const formData: FormData = new FormData();
-    formData.append('file', fileToUpload);
+      formData.append('file', fileToUpload);      
     return this.http.post(url, formData);
   }
+
+  getType(fileToUpload: File[]): Observable<any> {
+    const url = `${URL}upload`;
+    const formData: FormData = new FormData();
+    fileToUpload.forEach(element => {
+      formData.append('file', element);      
+    });
+    console.log("form DATA");
+    console.log(formData);
+    // formData.append('file', fileToUpload);
+    return this.http.post(url, formData);
+  }
+
+  send3DGraph(graph: Graph): Observable<any> { 
+    const url = `${URL}get-3d-graph`;
+    return this.http.post(url, graph);
+  }
   
+  load3DGraph(id_garment: string, number: string): Observable<any> {
+    const url = `${URL}load-3d-graph/${id_garment}/${number}`;
+    return this.http.get(url);
+  }
 }

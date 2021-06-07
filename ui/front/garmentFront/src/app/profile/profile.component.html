@@ -1,0 +1,11 @@
+  <div class="container my-4">
+    
+  <hr class="mb-5"/>
+  <div class="card-columns images-wrapper">
+        <div class="card" *ngFor="let item of images; index as i">
+          <img class="card-img-top" src={{item}} [alt]="1" (click)="chooseGarment(i)"/>
+          
+        </div>
+    </div>
+
+</div>

@@ -9,16 +9,25 @@
             <column name="id" type="int">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="x" type="float8[]">
-                <constraints unique="true" nullable="false"/>
+            <column name="x" type="float8">
+                <constraints nullable="false"/>
             </column>
-            <column name="y" type="float8[]">
-                <constraints unique="true" nullable="false"/>
+            <column name="y" type="float8">
+                <constraints nullable="false"/>
             </column>
             <column name="pattern_fk" type="int">
                 <constraints foreignKeyName="fk_pattern_point" referencedTableName="pattern"
                              referencedColumnNames="id"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="04062021_add_constraint_autoincrement_point" author="andreeai">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="public"
+                          tableName="point"/>
     </changeSet>
 </databaseChangeLog>
