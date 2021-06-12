@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthtestComponent } from './authtest/authtest.component';
 import { DrawComponent } from './draw/draw.component';
+import { EditComponent } from './edit/edit.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PatternComponent } from './pattern/pattern.component';
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuardService]
+  }, 
+  {
+    path: 'edit',
+    component: EditComponent,
     canActivate: [AuthGuardService]
   }, 
   {

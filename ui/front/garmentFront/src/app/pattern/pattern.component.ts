@@ -58,11 +58,16 @@ export class PatternComponent implements OnInit {
   }
 
   exportSpline() {
-    this.threeService.exportSpline();
+    this.threeService.exportSpline(1);
   }
 
   load3DGraph() {
     this.threeService.load3DGraph(this.graph);
+  }
+
+  sendGraphToCluster() {
+    this.threeService.exportSpline(2);
+
   }
 
   onValueChangePoint() {

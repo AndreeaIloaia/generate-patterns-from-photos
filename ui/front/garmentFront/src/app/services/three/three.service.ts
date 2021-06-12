@@ -1,4 +1,5 @@
 import * as THREE from '../../../../node_modules/three';
+import { Router } from '@angular/router';
 import { OrbitControls } from "../../../../node_modules/three/examples/jsm/controls/OrbitControls"
 import { ElementRef, Injectable, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { GLTFLoader } from '../../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
@@ -57,6 +58,7 @@ export class ThreeService implements OnDestroy {
   private frameId: number = null;
   constructor(private ngZone: NgZone, 
     private patternService: PatternService,
+    private route: Router,
     ) { }
  
   public ngOnDestroy(): void {
@@ -599,7 +601,9 @@ export class ThreeService implements OnDestroy {
   }
 
 
-  public exportSpline() {
+  //daca number e 1, atunci il trimite pe serverul din Java pentru stocare
+  //daca number e 2, atunci il trimite pe serverul din Py pentru clusterizare
+  public exportSpline(number: number) {
     console.log(this.seams);
     var graph = new Graph();
     const strplace = [];
@@ -671,14 +675,20 @@ export class ThreeService implements OnDestroy {
     const code = '[' + ( strplace.join( ',\n\t' ) ) + ']';
     prompt( 'copy and paste code', code );
 
-    this.patternService.send3DGraph(graph).subscribe(
+    this.patternService.send3DGraph(graph, number).subscribe(
       (res) => {
-        console.log('da');
+        if(number == 2) {
+          sessionStorage.setItem('identified_type', res.type);
+          this.route.navigateByUrl('/edit');
+
+        }
+        console.log(res);
       }, 
       (error) => {
         // this.errorMessage = error.error.message;
         console.log(error.error.message);
       });
+    
   }
 
   findIndex(array, point) {

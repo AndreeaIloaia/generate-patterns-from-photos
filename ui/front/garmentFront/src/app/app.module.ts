@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressComponent } from './draw/progress/progress.component';
 import { PatternComponent } from './pattern/pattern.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProfileComponent } from './profile/profile.component';
     ProgressComponent,
     PatternComponent,
     ProfileComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,56 @@
+<div class="wrapper">
+    <div class="tipar canvas-tipar">
+        <canvas id="DemoCanvas"></canvas>
+    </div>
+    <div class="tipar form-tipar">
+        <form ngNativeValidate>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rochie" id="dreapta" value="option1" (click)="change_type(0)">
+                <label class="form-check-label" for="dreapta">dreapta</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rochie" id="bie" value="option2" (click)="change_type(1)">
+                <label class="form-check-label" for="bie">bie</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rochie" id="clos" value="option3" (click)="change_type(2)">
+                <label class="form-check-label" for="clos">clos</label>
+              </div>
+            <div class="form-group">
+                    <input type="number" class="form-control" id="talie" required name="talie" [(ngModel)]="talie" placeholder="talie">    
+                    <div *ngIf="model === 'dreapta'">
+                        <input type="number" class="form-control" id="sold" required name="sold" [(ngModel)]="sold" placeholder="sold">    
+                    </div>
+                    <input type="number" class="form-control" id="lungime" required name="lungime" [(ngModel)]="lungime" placeholder="lungime">    
+                    <div *ngIf="model === 'dreapta'">
+                        <input type="number" class="form-control" id="sold_talie" required name="sold_talie" [(ngModel)]="sold_talie" placeholder="sold-talie">    
+                    </div>
+                    <!-- <div *ngIf="model === 'dreapta'">
+                        <input type="text" class="form-control" id="tip" required name="tip" [(ngModel)]="tip" placeholder="tip">    
+                    </div> -->
+                    <div *ngIf="model === 'dreapta'">
+                        <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example" [(ngModel)]="tip" [ngModelOptions]="{standalone: true}">
+                            <option class="form-control" selected>Tip dreapta</option>
+                            <option class="form-control" value="custom">Numere mari</option>
+                            <option class="form-control"  value="dreapta">Dreapta</option>
+                            <option class="form-control"  value="conica">Conica</option>
+                            <option class="form-control"  value="evazata">Evazata</option>
+                          </select>
+                    </div>
+                    <div *ngIf="model === 'clos'">
+                        <select class="form-select form-select-sm form-control" aria-label=".form-select-sm example" [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
+                            <option class="form-control" selected>Tip clos</option>
+                            <option class="form-control" value="1">Cerc</option>
+                            <option class="form-control"  value="2">Semi-cerc</option>
+                            <option class="form-control"  value="3">3/4</option>
+                          </select>
+                    </div>
+            </div>
+            <div class="form-group buttonContainer mb-4">
+                <input class="btn" (click)="draw()" value="Click" type="submit"
+                  name="submitButton"/>
+            </div>
+        
+        </form>
+    </div>
+</div>

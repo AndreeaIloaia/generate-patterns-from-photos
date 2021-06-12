@@ -7,9 +7,11 @@ import com.andreea.app.models.*;
 import com.andreea.app.repository.GarmentRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Service
@@ -147,11 +151,17 @@ public class GarmentServiceImplementation {
         List<String> ids = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
         HashMap<Long, String> myMap = new HashMap<>();
-        garmentRepository.findAllByUser(userEntity).stream().forEach(e -> {
+        List<GarmentEntity> ceva = garmentRepository.findAllByUser(userEntity);
+        for(GarmentEntity e:ceva) {
             myMap.put(e.getId(), fileServiceImplementation.getFileNameForAGivenGarment(e.getId()));
             fileNames.add(fileServiceImplementation.getFileNameForAGivenGarment(e.getId()));
             ids.add(String.valueOf(e.getId()));
-        });
+        }
+//        garmentRepository.findAllByUser(userEntity).stream().forEach(e -> {
+//            myMap.put(e.getId(), fileServiceImplementation.getFileNameForAGivenGarment(e.getId()));
+//            fileNames.add(fileServiceImplementation.getFileNameForAGivenGarment(e.getId()));
+//            ids.add(String.valueOf(e.getId()));
+//        });
 
 
         List<String> images = new ArrayList<>();
@@ -187,5 +197,22 @@ public class GarmentServiceImplementation {
             lastList.add(data);
         }
         return new GarmentsDto(ids, lastList);
+    }
+
+    public void sendGraph(String idGarment) throws IOException {
+        GraphDto graph = graphServiceImplementation.loadGraph(Long.parseLong(idGarment), 0L);
+
+        String url = "http://127.0.0.1:5000/";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httppost = new HttpPost(url);
+
+//        StringEntity a = new StringEntity(graph.getVertices());
+        List<NameValuePair> params = new ArrayList<>(2);
+//        params.add(new Na("vertices", graph.getVertices()));
+
+        httppost.setEntity(new UrlEncodedFormEntity(params));
+
+        CloseableHttpResponse response = httpclient.execute(httppost);
+        HttpEntity entity = response.getEntity();
     }
 }

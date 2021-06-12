@@ -33,6 +33,16 @@ dependencies {
 	implementation group: 'com.auth0', name: 'java-jwt', version: '3.14.0'
 
 	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	// https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation group: 'org.json', name: 'json', version: '20210307'
+// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime
+	implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.3.1'
+// https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
 
 }
 

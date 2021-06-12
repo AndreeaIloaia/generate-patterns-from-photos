@@ -11,6 +11,7 @@ import com.andreea.app.models.PointEntity;
 import com.andreea.app.service.FileServiceImplementation;
 import com.andreea.app.service.GarmentServiceImplementation;
 import com.andreea.app.service.PatternServiceImplementation;
+import org.hibernate.graph.Graph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -154,6 +155,23 @@ public class GarmentController {
         try {
             GarmentsDto garmentsDto = garmentServiceImplementation.getGarments();
             return ResponseEntity.ok().body(garmentsDto);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Metoda pentru obtinerea tuturor pieselor vestimentare ale unui utilizator
+     *
+     * @return list: List<PointEntity>
+     */
+    @GetMapping("send-graph-to-py/{idGarment}")
+    public ResponseEntity sendGraphToPy(@PathVariable String idGarment) {
+        try {
+            garmentServiceImplementation.sendGraph(idGarment);
+            return ResponseEntity.ok().build();
 
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, e.getMessage()),
