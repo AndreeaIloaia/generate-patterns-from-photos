@@ -33,8 +33,12 @@ export class PatternComponent implements OnInit {
   graph: Graph;
   url_photo: any;
   isLoaded= false;
+  loading = false;
+
+  msg: string = "";
 
   ngOnInit(): void {
+    this.loading = false;
     this.threeService.createScene(this.rendererCanvas);
     this.threeService.animate();
   }
@@ -57,7 +61,9 @@ export class PatternComponent implements OnInit {
   }
 
   exportSpline() {
-    this.threeService.exportSpline(1);
+    this.msg = this.threeService.exportSpline(1);
+    // console.log(this.msg);
+    this.msg = "Modelul a fost salvat!";
   }
 
   load3DGraph() {
@@ -65,8 +71,9 @@ export class PatternComponent implements OnInit {
   }
 
   sendGraphToCluster() {
-    this.threeService.exportSpline(2);
-
+    this.msg = this.threeService.exportSpline(2);
+    this.loading = true;
+    // this.msg = "Se încarcă!";
   }
 
   onValueChangePoint() {

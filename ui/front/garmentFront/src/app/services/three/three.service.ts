@@ -609,7 +609,7 @@ export class ThreeService implements OnDestroy {
 
   //daca number e 1, atunci il trimite pe serverul din Java pentru stocare
   //daca number e 2, atunci il trimite pe serverul din Py pentru clusterizare
-  public exportSpline(number: number) {
+  public exportSpline(number: number): string {
     console.log(this.seams);
     var graph = new Graph();
     const strplace = [];
@@ -678,24 +678,27 @@ export class ThreeService implements OnDestroy {
     // console.log( strplace.join( ',\n' ) );
     console.log(graph);
     console.log(seams);
-    const code = '[' + ( strplace.join( ',\n\t' ) ) + ']';
-    prompt( 'copy and paste code', code );
+    // const code = '[' + ( strplace.join( ',\n\t' ) ) + ']';
+    // prompt( 'copy and paste code', code );
 
+    var msg;
     this.patternService.send3DGraph(graph, number).subscribe(
       (res) => {
         if(number == 2) {
           sessionStorage.setItem('identified_type', res.type);
           sessionStorage.setItem('diff', res.model);
+          msg = "Modelul a fost salvat!";
+          
           this.route.navigateByUrl('/edit');
-
         }
         console.log(res);
       }, 
       (error) => {
+        msg = error.error.message;
         // this.errorMessage = error.error.message;
         console.log(error.error.message);
       });
-    
+    return msg;
   }
 
   findIndex(array, point) {

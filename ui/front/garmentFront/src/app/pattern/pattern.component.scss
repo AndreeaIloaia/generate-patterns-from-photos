@@ -8,21 +8,39 @@
   // width: 100%;
 }
 
+// .form-check {
+//   text-align: center;
+//   width: 11%;
+// }
+
 .menu-wrapper {
   margin-left: 30px;
   width: 100%;
 }
 
 .start-end-op {
-  margin-left: 10px;
+  // margin-left: 10px;
   width: 80%;
+  text-align: center;
 }
 
 .see-seam-no {
-  width: 70%;
+  margin-right: 10px;
+  // width: 70%;
 }
 .inputs-numbers {
   width: 50px;
+  height: 25px;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.btn-add-point {
+  width: 110%;
+}
+
+.label-stergere {
+  margin-top: -9px !important;
 }
 
 .coords {
@@ -43,12 +61,26 @@ img {
   float: left;
 }
 
-.btn {
+.info {
+  padding: 10px;
+}
+
+svg {
+  margin-bottom: 10px;
+}
+
+label {
+  color: $primary;
+  font-size: 0.8rem;
+}
+
+.btn-add,
+.btn-modal {
   background-color: $primary;
   border-radius: 15px;
   border: 1px solid $primary;
-  color: rgb(102, 73, 73);
-  font-size: 0.5rem;
+  color: white;
+  font-size: 0.8rem;
   // font-weight: bold;
   transition: transform 80ms ease-in;
   position: relative;
@@ -56,17 +88,17 @@ img {
   text-align: center;
   padding-left: 5px;
   padding-right: 5px;
+  // margin-bottom: 5px;
+  // margin-top: 5px;
+  margin: 5px;
 }
 
-// .btn-container {
-//   margin-top: 20px;
-//   // margin-bottom: 10px;
-// }
-
-.btn:active {
+.btn-add:active,
+.btn-modal:active {
   transform: scale(0.75);
 }
 
-.btn:focus {
+.btn-add:focus,
+.btn-modal:focus {
   outline: none;
 }

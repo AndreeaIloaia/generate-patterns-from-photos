@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   garmentIds = [];
   images = [];
+  loading = true;
 
   constructor(
     private profileService: ProfileService,
@@ -18,11 +19,13 @@ export class ProfileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.profileService.getGarments().subscribe(
         (res) => {
           console.log(res);
           this.images = res.files;
           this.garmentIds = res.ids;
+          this.loading = false;
         }, 
         (error) => {
           // this.errorMessage = error.error.message;
