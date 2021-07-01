@@ -11,8 +11,8 @@
 
     <!--    <include file="liquibase/03182021_file_table.xml"/>-->
     <include file="liquibase/03272021_file_table_changed.xml"/>
-    <include file="liquibase/03272021_pattern_table.xml"/>
-    <include file="liquibase/03232021_point_table.xml"/>
+<!--    <include file="liquibase/03272021_pattern_table.xml"/>-->
+<!--    <include file="liquibase/03232021_point_table.xml"/>-->
     <include file="liquibase/03232021_point3D_table.xml"/>
     <include file="liquibase/03232021_nodes_table.xml"/>
     <include file="liquibase/03232021_seams_table.xml"/>

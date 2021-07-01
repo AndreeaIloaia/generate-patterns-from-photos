@@ -32,10 +32,10 @@ export class PatternComponent implements OnInit {
   current_point= [];
   graph: Graph;
   url_photo: any;
+  isLoaded= false;
 
   ngOnInit(): void {
     this.threeService.createScene(this.rendererCanvas);
-    // this.threeService.createScene(this.rendererCanvas);
     this.threeService.animate();
   }
 
@@ -48,7 +48,6 @@ export class PatternComponent implements OnInit {
   }
 
   addPoints() {
-    // this.threeService.addPoint();
     this.threeService.addPoint(this.index);
   }
 

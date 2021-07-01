@@ -6,7 +6,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import html2canvas from 'html2canvas';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Point } from '../model/point';
-import { MyFile } from '../model/file';
 
 
 @Component({
@@ -28,6 +27,8 @@ export class DrawComponent implements OnInit {
   typesGarment = Array<string>();
   errorMessage: string = "";
 
+  msg : string = "";
+
   constructor(
     private patternService: PatternService,
     private route: Router,
@@ -40,6 +41,9 @@ export class DrawComponent implements OnInit {
   }
 
   openModal(content) {
+    if (this.msg !== "") {
+      content = this.msg;
+    }
     this.modalService.open(content, { centered: true,  scrollable: true});
   }
 
@@ -64,13 +68,10 @@ export class DrawComponent implements OnInit {
         this.filesToUpload.push(e.target.files.item(index));
       }
     }
-    if(this.filesToUpload.length === 2) {
+    if(this.filesToUpload.length >= 1) {
       this.isUploaded = true;
       this.errorMessage = "";
     }
-    console.log(this.url);
-    console.log(this.filesToUpload);
-    console.log(this.isUploaded);
   }
 
   formDetails() {
@@ -80,23 +81,16 @@ export class DrawComponent implements OnInit {
   uploadFile() {
     this.patternService.getType(this.filesToUpload).subscribe(
       (res) => {
-        console.log(res)
-        for (let index = 0; index < res.types.length; index++) {
-          const element = res.types[index];
-          this.typesGarment.push(element);  
-        }
-        sessionStorage.setItem('types', this.typesGarment[0].toString());
+        console.log(res);
+        // console.log(this.urls[0].toString());
         sessionStorage.setItem('front_img', this.urls[0].toString());
-        sessionStorage.setItem('side_img', this.urls[1].toString());
-        sessionStorage.setItem('garment_id', res.id);
-        console.log(this.typesGarment);
-        // this.openModal('Imaginile au fost salvate. S-a identificat in imagine: ' + this.typesGarment[0]);
-        // this.openModal(this.shortContentRef);
+        sessionStorage.setItem('garment_id', res);
+
+        this.msg = "Imaginea a fost salvată cu succes!";
       }, 
       (error) => {
         this.errorMessage = error.error.message;
-        console.log(error.error.message);
-        
+        this.msg = "Imaginea există deja, încercați altă imagine!";
       });
   }
 
@@ -123,32 +117,4 @@ export class DrawComponent implements OnInit {
 			link.click();
 		});
   }
-
-  // draw(): void {
-  //   console.log(this.fileToUpload.file.name);
-  //   this.patternService.draw(this.fileToUpload.file.name).subscribe(
-  //     (res) => {
-  //      for (let index = 0; index < res.length; index++) {
-  //         for (let i = 0; i < res[index].length; i++) {
-  //           const element = res[index][i];
-  //           this.list.push(element);
-  //         }
-  //         }
-  //         sessionStorage.setItem("generatedCoords", JSON.stringify(this.list));
-  //         this.route.navigateByUrl('/patterns');
-          
-  //         // console.log(this.list);
-  //       // const canvas = <HTMLCanvasElement> document.getElementById('canvas');
-  //       // const ctx = canvas.getContext('2d');
-  //       // ctx.moveTo(this.list[0].x, this.list[0].y);
-  //       // for (let index = 1; index < this.list.length; index++) {
-  //       //   const element = this.list[index];
-  //       //   ctx.lineTo(element.x, element.y);    
-  //       // }
-  //       // ctx.lineTo(this.list[0].x, this.list[0].y);
-  //       // ctx.lineWidth = 5;
-  //       // ctx.stroke();
-  //     }
-  //   );
-  // }
 }

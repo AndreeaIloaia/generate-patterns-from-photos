@@ -1,19 +1,26 @@
+@import "../../styles/variables";
+
 .space {
   float: left;
-  margin-top: 70px;
+  margin-top: 87px;
+  padding-left: 20px;
   height: 100%;
   // width: 100%;
 }
 
 .menu-wrapper {
-  margin-left: 10px;
+  margin-left: 30px;
   width: 100%;
 }
 
 .start-end-op {
   margin-left: 10px;
+  width: 80%;
 }
 
+.see-seam-no {
+  width: 70%;
+}
 .inputs-numbers {
   width: 50px;
 }
@@ -34,4 +41,32 @@ img {
 .img {
   width: 50%;
   float: left;
+}
+
+.btn {
+  background-color: $primary;
+  border-radius: 15px;
+  border: 1px solid $primary;
+  color: rgb(102, 73, 73);
+  font-size: 0.5rem;
+  // font-weight: bold;
+  transition: transform 80ms ease-in;
+  position: relative;
+  border-radius: 2px;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+// .btn-container {
+//   margin-top: 20px;
+//   // margin-bottom: 10px;
+// }
+
+.btn:active {
+  transform: scale(0.75);
+}
+
+.btn:focus {
+  outline: none;
 }

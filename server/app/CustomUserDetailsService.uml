@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.andreea.app.auth.CustomUserDetailsService</OriginalElement>
+  <nodes>
+    <node x="0.0" y="453.0">com.andreea.app.auth.JwtTokenProvider</node>
+    <node x="269.25" y="486.0">com.andreea.app.auth.CustomUserDetailsService</node>
+    <node x="1013.0" y="0.0">com.andreea.app.auth.JwtAuthenticationResponse</node>
+    <node x="474.0" y="697.0">com.andreea.app.auth.JwtAuthenticationEntryPoint</node>
+    <node x="84.69642857142856" y="0.0">com.andreea.app.auth.UserPrincipal</node>
+    <node x="236.25" y="853.0">com.andreea.app.auth.SecurityConfig</node>
+    <node x="13.0" y="664.0">com.andreea.app.auth.JwtAuthenticationFilter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.andreea.app.auth.JwtAuthenticationFilter" target="com.andreea.app.auth.CustomUserDetailsService">
+      <point x="110.0" y="-69.5" />
+      <point x="343.0" y="639.0" />
+      <point x="334.0" y="639.0" />
+      <point x="-64.75" y="47.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.CustomUserDetailsService" target="com.andreea.app.auth.UserPrincipal">
+      <point x="0.0" y="-47.5" />
+      <point x="398.75" y="428.0" />
+      <point x="344.94642857142856" y="428.0" />
+      <point x="86.75" y="201.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.SecurityConfig" target="com.andreea.app.auth.JwtAuthenticationFilter">
+      <point x="-41.75" y="-91.5" />
+      <point x="361.5" y="828.0" />
+      <point x="343.0" y="828.0" />
+      <point x="110.0" y="69.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.JwtAuthenticationFilter" target="com.andreea.app.auth.JwtTokenProvider">
+      <point x="-110.0" y="-69.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.JwtTokenProvider" target="com.andreea.app.auth.UserPrincipal">
+      <point x="0.0" y="-80.5" />
+      <point x="123.0" y="428.0" />
+      <point x="171.44642857142856" y="428.0" />
+      <point x="-86.75" y="201.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.SecurityConfig" target="com.andreea.app.auth.JwtAuthenticationEntryPoint">
+      <point x="125.25" y="-91.5" />
+      <point x="528.5" y="828.0" />
+      <point x="721.0" y="828.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="com.andreea.app.auth.SecurityConfig" target="com.andreea.app.auth.CustomUserDetailsService">
+      <point x="41.75" y="-91.5" />
+      <point x="445.0" y="828.0" />
+      <point x="463.5" y="828.0" />
+      <point x="64.75" y="47.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9991649269311064" x="354.94504805683243" y="267.2398662766402" />
+  <SelectedNodes>
+    <node>com.andreea.app.auth.UserPrincipal</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -4,8 +4,6 @@ import com.andreea.app.auth.*;
 import com.andreea.app.dtos.ApiResponse;
 import com.andreea.app.dtos.LoginRequest;
 import com.andreea.app.dtos.SignUpRequest;
-import com.andreea.app.models.Role;
-import com.andreea.app.models.UserEntity;
 import com.andreea.app.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -59,8 +56,9 @@ public class AuthController {
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.generateToken(authentication);
-            Role role = userServiceImplementation.checkIfAdmin(loginRequest.getUsernameOrEmail()) ? Role.ADMIN : Role.USER;
-            return new ResponseEntity<>(new JwtAuthenticationResponse(jwt, role), HttpStatus.OK);
+//            Role role = userServiceImplementation.checkIfAdmin(loginRequest.getUsernameOrEmail()) ? Role.ADMIN : Role.USER;
+//            return new ResponseEntity<>(new JwtAuthenticationResponse(jwt, role), HttpStatus.OK);
+            return new ResponseEntity<>(new JwtAuthenticationResponse(jwt), HttpStatus.OK);
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(new ApiResponse(false, "Bad credentials. Try again!"),
                     HttpStatus.BAD_REQUEST);
@@ -93,15 +91,18 @@ public class AuthController {
         }
 
         //create user's account
-        UserEntity userEntity = new UserEntity(signUpRequest.getUsername(), signUpRequest.getPassword());
+//        UserEntity userEntity = new UserEntity(signUpRequest.getUsername(), signUpRequest.getPassword());
+//
+//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+//        userEntity.setAdmin(signUpRequest.getIsAdmin());
+//        userEntity.setEmail(signUpRequest.getEmail());
+//
+//        UserEntity result = userServiceImplementation.save(userEntity);
+        boolean isSaved = userServiceImplementation.saveUser(signUpRequest.getUsername(),
+                passwordEncoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getIsAdmin(), signUpRequest.getEmail());
 
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        userEntity.setAdmin(signUpRequest.getIsAdmin());
-        userEntity.setEmail(signUpRequest.getEmail());
-
-        UserEntity result = userServiceImplementation.save(userEntity);
-
-        if (result != null) {
+        if (isSaved) {
             return new ResponseEntity<>(new ApiResponse(true, "User registered successfully"),
                     HttpStatus.OK);
         }

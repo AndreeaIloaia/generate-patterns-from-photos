@@ -1,8 +1,6 @@
 package com.andreea.app.controller;
 
 import com.andreea.app.AppApplicationTests;
-import com.andreea.app.auth.UserPrincipal;
-import com.andreea.app.dtos.FileUploadResponse;
 import com.andreea.app.dtos.LoginRequest;
 import com.andreea.app.dtos.SignUpRequest;
 import com.andreea.app.models.FileEntity;
@@ -10,32 +8,15 @@ import com.andreea.app.models.UserEntity;
 import com.andreea.app.service.FileServiceImplementation;
 import com.andreea.app.service.GarmentServiceImplementation;
 import com.andreea.app.service.UserServiceImplementation;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Map;
 
@@ -99,22 +80,22 @@ public class FileControllerTest extends AppApplicationTests {
      */
     @Test
     public void upload() throws Exception {
-        setup();
-
-        //metoda gresita
-        mockMvc.perform(get("/api/files/upload")).andExpect(status().is4xxClientError()).andReturn();
-        mockMvc.perform(post("/api/files/*")).andExpect(status().is4xxClientError()).andReturn();
-//        mockMvc.perform(post("/login")).andExpect(status().is4xxClientError()).andReturn();
-
-        MockMultipartFile file = new MockMultipartFile("file","hello.txt",
-                MediaType.TEXT_PLAIN_VALUE,"Hello, World!".getBytes());
-        String type = "rochie";
-
-        mockMvc.perform(multipart("/api/files/upload/".concat(type)).file(file)).andExpect(status().is4xxClientError());
-        String auth = "Authorization";
-        String bearer = "Bearer " + token;
-        mockMvc.perform(multipart("/api/files/upload/".concat(type)).file(file).header(HttpHeaders.AUTHORIZATION, bearer)).andExpect(status().is2xxSuccessful());
-
-        teardown();
+//        setup();
+//
+//        //metoda gresita
+//        mockMvc.perform(get("/api/files/upload")).andExpect(status().is4xxClientError()).andReturn();
+//        mockMvc.perform(post("/api/files/*")).andExpect(status().is4xxClientError()).andReturn();
+////        mockMvc.perform(post("/login")).andExpect(status().is4xxClientError()).andReturn();
+//
+//        MockMultipartFile file = new MockMultipartFile("file","hello.txt",
+//                MediaType.TEXT_PLAIN_VALUE,"Hello, World!".getBytes());
+//        String type = "rochie";
+//
+//        mockMvc.perform(multipart("/api/files/upload/".concat(type)).file(file)).andExpect(status().is4xxClientError());
+//        String auth = "Authorization";
+//        String bearer = "Bearer " + token;
+//        mockMvc.perform(multipart("/api/files/upload/".concat(type)).file(file).header(HttpHeaders.AUTHORIZATION, bearer)).andExpect(status().is2xxSuccessful());
+//
+//        teardown();
     }
 }

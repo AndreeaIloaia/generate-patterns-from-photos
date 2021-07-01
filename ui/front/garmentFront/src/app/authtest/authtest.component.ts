@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { LoginService } from '../services/login/login.service';
@@ -10,6 +10,8 @@ import { RegisterService } from '../services/register/register.service';
   styleUrls: ['./authtest.component.scss']
 })
 export class AuthtestComponent implements OnInit {
+  @ViewChild('loginBtn') login_slide: ElementRef;
+  
   usernameOrEmail: string;
   password: string;
 
@@ -57,7 +59,7 @@ export class AuthtestComponent implements OnInit {
         sessionStorage.clear();
         sessionStorage.setItem('tokenType', res.tokenType);
         sessionStorage.setItem('token', res.accessToken);
-        sessionStorage.setItem('role', res.role);
+        // sessionStorage.setItem('role', res.role);
 
         this.route.navigateByUrl('/home');
       }, 
@@ -69,18 +71,18 @@ export class AuthtestComponent implements OnInit {
   }
   
   register(): void {
+    console.log(this.passwordRegister);
     this.registerService.register({
       username: this.username,
       email: this.email,
-      password: this.password
+      password: this.passwordRegister
     }).subscribe(
       (res) => {
-        sessionStorage.clear();
-        sessionStorage.setItem('tokenType', res.tokenType);
-        sessionStorage.setItem('token', res.accessToken);
-        sessionStorage.setItem('role', res.role);
-
-        this.route.navigateByUrl('/home');
+        this.username = '';
+        this.email = '';
+        this.passwordRegister = '';
+        this.login_slide.nativeElement.click();
+        // this.route.navigateByUrl('/login');
       }, 
       (status) => {
         this.messageRegister = status.error;

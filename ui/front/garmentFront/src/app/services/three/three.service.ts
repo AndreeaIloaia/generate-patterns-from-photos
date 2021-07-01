@@ -71,10 +71,16 @@ export class ThreeService implements OnDestroy {
     return this.endPoint;
   }
 
+  clear() {
+    console.log('seams');
+    console.log(this.seams);
+    console.log('graph');
+    console.log(this.graph);
+    this.seams = [];
+  }
+
   public createScene(canvas: ElementRef<HTMLCanvasElement>): void {
-    // for (let index = 0; index < this.no_seams; index++) {
-    //   this.seams.push(new Seam());
-    // }
+    this.clear();
 
     this.point = new THREE.Vector3();
     this.raycaster = new THREE.Raycaster();
@@ -353,9 +359,11 @@ export class ThreeService implements OnDestroy {
     if ( position ) {
       object.position.copy( position );
     } else {
-      object.position.x = Math.random() * 1000 - 500;
-      object.position.y = Math.random() * 600;
-      object.position.z = Math.random() * 800 - 400;
+      object.position.x = 0;
+      // object.position.x = Math.random() * 100;
+      // object.position.y = Math.random() * 600;
+      object.position.y = 0;
+      object.position.z = Math.random() * 100 + 100;
     }
 
     object.castShadow = true;
@@ -416,9 +424,7 @@ export class ThreeService implements OnDestroy {
     this.updateSplineOutline(index);
   }
 
-/////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
+
   public removePoint(index_seam, coords) {
     if ( this.seams[index_seam].splinePointsLength <= 2 ) {
        return;
@@ -679,6 +685,7 @@ export class ThreeService implements OnDestroy {
       (res) => {
         if(number == 2) {
           sessionStorage.setItem('identified_type', res.type);
+          sessionStorage.setItem('diff', res.model);
           this.route.navigateByUrl('/edit');
 
         }

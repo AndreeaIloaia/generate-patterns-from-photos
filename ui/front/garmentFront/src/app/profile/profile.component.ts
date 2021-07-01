@@ -31,9 +31,9 @@ export class ProfileComponent implements OnInit {
   }
 
   chooseGarment(i: number) {
-    i++;
-    sessionStorage.setItem('garment_id', i + "");
-    sessionStorage.setItem('front_img', this.images[i - 1].toString());
+    // i++;
+    sessionStorage.setItem('garment_id', this.garmentIds[i] + "");
+    sessionStorage.setItem('front_img', this.images[i].toString());
     this.route.navigateByUrl('/patterns');
   }
 

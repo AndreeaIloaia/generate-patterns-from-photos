@@ -11,11 +11,11 @@ import com.andreea.app.models.Role;
 public class JwtAuthenticationResponse {
     private String accessToken;
     private String tokenType = "Bearer";
-    private Role role;
+//    private Role role;
 
-    public JwtAuthenticationResponse(String accessToken, Role role) {
+    public JwtAuthenticationResponse(String accessToken) {
         this.accessToken = accessToken;
-        this.role = role;
+//        this.role = role;
     }
 
     public String getAccessToken() {
@@ -34,11 +34,11 @@ public class JwtAuthenticationResponse {
         this.tokenType = tokenType;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 }

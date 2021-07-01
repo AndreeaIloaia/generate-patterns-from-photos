@@ -10,9 +10,8 @@
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                       </svg>
-                    <h3>Drag and drop file here</h3>
-                    <h3>or</h3>
-                    <label for="fileDropRef">Browse for file</label>
+                    <h3>Drag & drop</h3>
+                    <label for="fileDropRef">Caută fișier</label>
                 </div>
                 <div *ngFor="let file of filesToUpload">
                     <div class="file-div"  *ngIf="filesToUpload.length != 0">
@@ -39,121 +38,24 @@
                     </div>
                 </div>
                 
-                <button class="div-button form-element form-group col-md-12" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" (click)="uploadFile(); openModal(shortContent)" name="submitButton">Salveaza</button>
-                <div class="errorMessage" *ngIf="errorMessage !=''">{{ errorMessage }}</div>
-                <button class="div-button form-element form-group col-md-12" (click)="openModal(longContent)">Completeaza detalii</button> 
+                <button class="div-button form-element form-group col-md-12" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" (click)="uploadFile(); openModal(content)" name="submitButton">Salveaza</button>
+                <!-- <div class="errorMessage" *ngIf="errorMessage !=''">{{ errorMessage }}</div> -->
                 <button class="div-button form-element form-group col-md-12" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" name="drawButton" (click)="goToPatterns()">Genereaza</button>
-                <!-- <button class="div-button form-element form-group col-md-12" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" (click)="draw()" name="drawButton">Genereaza</button> -->
-                <!-- <input class="div-button form-element" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" value="Save photo" (click)="uploadFile()" type="submit" name="submitButton"/> -->
-                  <ng-template #longContent let-modal>
-                    <div class="modal-header">
-                      <h4 class="modal-title">Detalii</h4>
-                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                S-a identificat pentru acest item: {{typesGarment[0]}}
-                                <br>
-                                Daca nu sunteti de acord, puteti schimba tipul din lista de mai jos
-                            </div>
-                            <div class="form-group col-md-12">
-                                <select class="form-select div-button form-element" aria-label="Default select example">
-                                    <option selected>Alege tip</option>
-                                    <option value="rochie">Rochie</option>
-                                    <option value="bluza">Bluza</option>
-                                    <option value="fusta">Pantaloni</option>
-                                </select>  
-                            </div>
-                        </div>
-                        <div class="form-group" *ngIf="typesGarment[0] == 'shirt' || typesGarment[0] == 'dress'">
-                            <div class="form-row">
-                                <h4>Circumferinta torso</h4>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="circumferintaTalie">Talie</label>
-                                    <input type="number" class="form-control" id="circumferintaTalie" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="circumferintaSold">Sold</label>
-                                    <input type="number" class="form-control" id="circumferintaSold" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="circumferintaPiept">Piept</label>
-                                    <input type="number" class="form-control" id="circumferintaPiept" placeholder="cm">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group"  *ngIf="typesGarment[0] == 'shirt' || typesGarment[0] == 'dress'">
-                            <div class="form-row">
-                                <h4>Lungime torso</h4>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="lungimeSpate">Spate</label>
-                                    <input type="number" class="form-control" id="lungimeSpate" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="lungimeFata">Fata</label>
-                                    <input type="number" class="form-control" id="lungimeFata" placeholder="cm">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group"  *ngIf="typesGarment[0] == 'pants'">
-                            <div class="form-row">
-                                <h4>Masuratori pantaloni</h4>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="lungimeSpate">Spate</label>
-                                    <input type="number" class="form-control" id="lungimeSpate" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="lungimeFata">Fata</label>
-                                    <input type="number" class="form-control" id="lungimeFata" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="circumferintaTaliePantaloni">Talie</label>
-                                    <input type="number" class="form-control" id="circumferintaTaliePantaloni" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="circumferintaSoldPantaloni">Sold</label>
-                                    <input type="number" class="form-control" id="circumferintaSoldPantaloni" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="circumferintaGenunchi">Genunchi</label>
-                                    <input type="number" class="form-control" id="circumferintaGenunchi" placeholder="cm">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="circumferintaGlezna">Glezna</label>
-                                    <input type="number" class="form-control" id="circumferintaGlezna" placeholder="cm">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ngbAutofocus class="btn btn-focus" (click)="modal.close('Ok click')">Ok</button>
-                        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-                    </div>
-                  </ng-template>
+               
 
             </form>
         </div>
     </div>
 
-    <ng-template #shortContent let-modal>
+    <ng-template #content let-modal>
         <div class="modal-header">
-          <h4 class="modal-title">Detalii</h4>
+          <h4 class="modal-title"></h4>
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <p>Imaginile au fost salvate. S-a identificat in imagine: {{ typesGarment[0] }}</p>
+            <p>{{msg}}</p>
             <br>
         </div>
         <div class="modal-footer">
@@ -164,17 +66,16 @@
     <div class="space photo">
         
         <div class="upload front">
-            <h3>Fata</h3>
             <div class="image-div"  *ngIf="filesToUpload.length != 0">
                 <img [src]="urls[0]">
             </div>
         </div>
-        <div class="upload side">
+        <!-- <div class="upload side">
             <h3>Profil</h3>
             <div class="image-div"  *ngIf="filesToUpload.length != 0">
                 <img [src]="urls[1]">
             </div>
-        </div>
+        </div> -->
         <!-- <div class="upload" *ngFor="let url of urls">
             <img [src]="url">
         </div> -->

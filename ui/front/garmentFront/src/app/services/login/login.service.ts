@@ -12,6 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user: UserLogin): Observable<any> {
+    console.log('blabla login');
     const url = `${URL}login`;
     return this.http.post<any>(url, user);
   }

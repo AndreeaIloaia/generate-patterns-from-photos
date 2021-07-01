@@ -80,4 +80,26 @@ public class UserServiceImplementation {
         }
         return user.get().isAdmin();
     }
+
+    /**
+     * @param userEntity - UserEntity
+     * @return UserEntity - daca s-a salvat, null - altfel
+     */
+    /**
+     * Salveaza un nou user
+     * @param username - String
+     * @param password - String
+     * @param isAdmin - boolean
+     * @param email - String
+     * @return UserEntity - daca s-a salvat, null - altfel
+     */
+    public boolean saveUser(String username, String password, boolean isAdmin, String email) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(email);
+        userEntity.setPassword(password);
+        userEntity.setUsername(username);
+        userEntity.setAdmin(isAdmin);
+        UserEntity savedEntity = userRepository.save(userEntity);
+        return (savedEntity != null);
+    }
 }

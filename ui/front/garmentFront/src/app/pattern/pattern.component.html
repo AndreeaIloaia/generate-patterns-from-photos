@@ -4,17 +4,17 @@
     <div class="canva-container">
         <canvas id="canvas" width=500 height=500></canvas>   
     </div> -->
-    <div class="tot container">
+    <div>
     <div class="menu-wrapper row">
         
-    <div class="load-export col-1">
-      <button class="btn-add row" (click)="openModal(loadContent, 1)">Choose</button>
-      <button class="btn-add row" (click)="sendID(0)">Load</button>
-      <button class="btn-add row" (click)="exportSpline()">Export</button>
+    <div class="load-export col-1 form-check ">
+      <button class="btn row" (click)="openModal(loadContent, 1)">Alege</button>
+      <button class="btn row" (click)="sendID(0)">Încarcă</button>
+      <button class="btn row" (click)="exportSpline()">Salvează</button>
     </div>
     
 
-    <div class="inputs-div col-2">
+    <div class="inputs-div col-2 form-check ">
       <div class="row">
       <label class="col-2">x:</label>
       <input class="inputs-numbers coords col" type="text" [(ngModel)]="point[0]"> 
@@ -29,29 +29,29 @@
       </div>
     </div>
    
-    <div class="start-end-op col-2">
+    <div class="start-end-op col-2 form-check ">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-plus row" viewBox="0 0 16 16" (click)="onValueChangePoint()">
         <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
         <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
       </svg>
-      <button class="btn-add row" (click)="setStartPoint()">StartPoint</button>
-      <button class="btn-add row" (click)="setLastPoint()">EndPoint</button>
+      <button class="btn row" (click)="setStartPoint()">Primul punct</button>
+      <button class="btn row" (click)="setLastPoint()">Ultimul punct</button>
     </div>
    
-    <div class="add-seam col-1">
-      <label class="row">Numar puncte</label>
+    <div class="add-seam col-1 form-check ">
+      <label class="row">Număr puncte</label>
       <input class="inputs-numbers row" type="text" [(ngModel)]="nr_points" >
-      <button class="btn-add row" (click)="addNewSeam()">Add</button>
+      <button class="btn row" (click)="addNewSeam()">Adaugă</button>
     </div>
 
-    <div class="see-seam-no col-2">
-      <label class="row">Index cusatura</label>
+    <div class="see-seam-no col-2 form-check ">
+      <label class="row">Index cusătură</label>
       <input class="inputs-numbers row" type="text"  [(ngModel)]="index_seam">
-      <button class="btn-add row" (click)="getIndexSeam()">Vizualizeaza</button>
+      <button class="btn row" (click)="getIndexSeam()">Vizualizează</button>
     </div>
 
-    <div class="add-point col-1">
-      <button class="btn-add row" (click)="addPoints()">Add</button>
+    <div class="add-point col-1 form-check ">
+      <button class="btn row" (click)="addPoints()">Adaugă punct</button>
       <input class="inputs-numbers row" type="number" id="index" [(ngModel)]="index" required > 
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle row" viewBox="0 0 16 16" (click)="openModal(longContent, 2)">
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -59,20 +59,20 @@
       </svg>
     </div>
 
-    <div class="remove-point col-1">
-      <label class="row">Sterge punct</label>
+    <div class="remove-point col-1 form-check ">
+      <label class="row">Șterge punct</label>
       <input class="inputs-numbers row" type="text"  [(ngModel)]="delete_from_seam">
-      <button class="btn-add row" (click)="deleteFromSeam()">Sterge</button>
+      <button class="btn row" (click)="deleteFromSeam()">Șterge</button>
     </div>
 
-    <div class="remove-seam col-1">
-      <label class="row">Sterge cusatura</label>
+    <div class="remove-seam col-1 form-check ">
+      <label class="row">Șterge cusatura</label>
       <input class="inputs-numbers row" type="text"  [(ngModel)]="delete_from_seam">
-      <button class="btn-add row" (click)="deleteSeam()">Sterge</button>
+      <button class="btn row" (click)="deleteSeam()">Șterge</button>
     </div>
 
-    <div class="remove-seam col-1">
-      <button class="btn-add row" (click)="sendGraphToCluster()">Trimite</button>
+    <div class="remove-seam col-1 form-check ">
+      <button class="btn row" (click)="sendGraphToCluster()">Trimite</button>
     </div>
 
     <ng-template #loadContent let-modal>
@@ -83,8 +83,8 @@
         </button>
       </div>
       <div class="modal-body">
-            <div class="img" (click)="sendID(1)">
-                <img src="../../assets/fara_maneci.png">
+            <div class="img" (click)="sendID(66)">
+                <img src="../../assets/clini_6.png">
             </div>
             <div class="img" (click)="sendID(4)">
                 <img src="../../assets/rochie_simpla_fara_maneci.png">
@@ -107,6 +107,9 @@
             <div class="img" (click)="sendID(12)">
               <img src="../../assets/clos.png">
             </div>
+            <div class="img" (click)="sendID(65)">
+              <img src="../../assets/manechini_8.png">
+            </div>
       </div>
       <div class="modal-footer">
           <button type="button" ngbAutofocus class="btn btn-focus" (click)="modal.close('Ok click')">Ok</button>
@@ -115,13 +118,13 @@
 
     <ng-template #longContent let-modal>
         <div class="modal-header">
-          <h4 class="modal-title">Informatii</h4>
+          <h4 class="modal-title">Model încărcat</h4>
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <img src={{url_photo}} alt='1' crossorigin>
+            <img *ngIf="url_photo" src={{url_photo}} alt='1' crossorigin>
         </div>
         <div class="modal-footer">
             <button type="button" ngbAutofocus class="btn btn-focus" (click)="modal.close('Ok click')">Ok</button>
@@ -137,8 +140,3 @@
       </div>
 </section>
 
-<!-- (pointerover)="onPointerMove($event)"
-        (pointerdown)="onPointerDown($event)"
-        (pointerup)="onPointerUp($event)"
-        (change)="change()"
-        (objectChange)="objectChange()" -->
