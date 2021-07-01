@@ -32,6 +32,11 @@ public class GarmentServiceImplementation {
     @Autowired
     ServletContext context;
 
+    /**
+     * Obtinerea userului curent din aplicatie
+     * @return UserEntity
+     * @throws Exception
+     */
     private UserEntity getCurrentUser() throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -44,6 +49,12 @@ public class GarmentServiceImplementation {
         return user.get();
     }
 
+    /**
+     * Metoda pentru salvare unui item vestimentar
+     * @param type - String
+     * @return Garment Entity
+     * @throws Exception
+     */
     public GarmentEntity saveGarment(String type) throws Exception {
         UserEntity userEntity = getCurrentUser();
 
@@ -56,51 +67,10 @@ public class GarmentServiceImplementation {
     }
 
 
-//    /**
-//     * Metoda face legatura dintre scriptul de python de clasificare si server
-//     *
-//     * @param fileEntity - numele fisierului pe care il dam spre scriptul python
-//     * @return lista de denumiri obtinute
-//     */
-//    public GarmentTypeDto getType(FileEntity fileEntity, Long id) throws Exception {
-////        GarmentEntity garmentEntity = saveGarment("nu");
-////        FileEntity fileEntity = fileServiceImplementation.upload(file, id);
-//        String path = "D:/Facultate/Licenta/generate-patterns-from-photos/server/app/fileStorage/";
-//        String fileName = path + fileEntity.getFileName();
-//
-//        String url = "http://127.0.0.1:5000/";
-//        CloseableHttpClient httpclient = HttpClients.createDefault();
-//        HttpPost httppost = new HttpPost(url);
-//
-//        List<BasicNameValuePair> params = new ArrayList<>(2);
-//        params.add(new BasicNameValuePair("url", fileName));
-//
-//        httppost.setEntity(new UrlEncodedFormEntity(params));
-//
-//        CloseableHttpResponse response = httpclient.execute(httppost);
-//        HttpEntity entity = response.getEntity();
-//
-//        if (entity != null) {
-//            String responseString = EntityUtils.toString(entity);
-//            String listTypes = responseString.split(":")[1].replace("\"", "")
-//                    .replace("[", "")
-//                    .replace("]", "")
-//                    .replace("\n", "")
-//                    .replace("}", "");
-//            String[] a = new String[0];
-//            List<String> types = new ArrayList<>();
-//            if (listTypes.contains(",")) {
-//                a = listTypes.split(",");
-//                types = Arrays.asList(a);
-//            } else {
-//                types.add(listTypes);
-//            }
-//            System.out.println(types);
-//            return new GarmentTypeDto(id, types);
-//        }
-//        return null;
-//    }
-
+    /**
+     * Metoda de salvare a unui graf trimis de pe client
+     * @param graphDto - GraphDto
+     */
     public void saveGraph(GraphDto graphDto) {
         HashMap<Long, NodeGraph> graph = new HashMap<>();
         GarmentEntity garmentEntity = garmentRepository.findById(Long.parseLong(graphDto.getId())).get();
@@ -108,10 +78,21 @@ public class GarmentServiceImplementation {
 
     }
 
+    /**
+     * Metoda de incarcare a unui graf din baza de date
+     * @param idGarment - String
+     * @param idOption - String
+     * @return GraphDto
+     */
     public GraphDto loadGraph(String idGarment, String idOption) {
         return graphServiceImplementation.loadGraph(Long.parseLong(idGarment), Long.parseLong(idOption));
     }
 
+    /**
+     * Obtinerea tuturor itemurilor de la un utilizator
+     * @return
+     * @throws Exception
+     */
     public GarmentsDto getGarments() throws Exception {
         UserEntity userEntity = getCurrentUser();
         List<String> ids = new ArrayList<>();
@@ -160,6 +141,13 @@ public class GarmentServiceImplementation {
         return new GarmentsDto(ids, lastList);
     }
 
+    /**
+     * Salvarea unor fisiere asociate unui item vestimentar
+     * @param garmentEntity - GarmentEntity
+     * @param files - MultipartFile
+     * @return true - daca au fost salvate
+     *          false - altfel
+     */
     public boolean saveFilesForGarment(GarmentEntity garmentEntity, MultipartFile[] files) {
         for (MultipartFile f : files) {
             try {

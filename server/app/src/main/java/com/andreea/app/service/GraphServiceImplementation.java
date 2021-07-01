@@ -23,6 +23,12 @@ public class GraphServiceImplementation {
     @Autowired
     SeamPointRepository seamPointRepository;
 
+    /**
+     * Salvarea unui graf corespunzator unui item folosind datele de pe client
+     * @param garmentEntity - GarmentEntity
+     * @param graphDto - GraphDto
+     * @return
+     */
     public HashMap<Long, NodeGraph> saveGraph(GarmentEntity garmentEntity, GraphDto graphDto) {
         HashMap<Long, NodeGraph> graph = new HashMap<>();
 
@@ -75,6 +81,12 @@ public class GraphServiceImplementation {
         return graph;
     }
 
+    /**
+     * Incarcare unui graph din baza de date in functie de ID-ul hainei sau de optiunea aleasa
+     * @param idGarment - Long
+     * @param idOption - Long
+     * @return GraphDto
+     */
     public GraphDto loadGraph(Long idGarment, Long idOption) {
         //daca nu exista un graf pentru itemul dorit, se va incarca cel de baza cu id = 583
         if(point3DRepository.findAllByGarmentEntity_Id(idGarment).size() == 0) {
