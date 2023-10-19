@@ -1,0 +1,143 @@
+<section>
+    
+    <div class="space s-form">
+        <div class="form-group">
+            
+            <form>
+                <div class="dropzone">
+                    <input type="file" #fileDropRef id="fileDropRef" (change)="handleFileInput($event)"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg>
+                    <h3>Drag and drop file here</h3>
+                    <h3>or</h3>
+                    <label for="fileDropRef">Browse for file</label>
+                </div>
+
+                <div class="file-div"  *ngIf="isUploaded">
+                        <div class="file-icon">
+                            <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
+                                <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
+                              </svg>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4 class="name">
+                                {{ fileToUpload?.file.name }}
+                            </h4>
+                        </div>
+                
+                        <div class="delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 18" (click)="delete()">
+                                <path fill="#B1B1B1" fill-rule="nonzero"
+                                    d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                            </svg>
+                        </div>
+                    
+                </div>
+                
+                <button class="div-button form-element form-group col-md-12" (click)="openModal(longContent)">Completeaza detalii</button> 
+                <button class="div-button form-element form-group col-md-12" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" (click)="uploadFile()" name="submitButton">Salveaza</button>
+
+                <!-- <input class="div-button form-element" [disabled]="!isUploaded" [ngClass]="{'disabled': !isUploaded}" value="Save photo" (click)="uploadFile()" type="submit" name="submitButton"/> -->
+                  <ng-template #longContent let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detalii</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <select class="form-select div-button form-element" aria-label="Default select example">
+                                    <option selected>Alege tip</option>
+                                    <option value="rochie">Rochie</option>
+                                    <option value="bluza">Bluza</option>
+                                    <option value="fusta">Fusta</option>
+                                </select>  
+                            </div>
+                        </div>
+                        <h4>Circumferinta</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="circumferintaTalie">Talie</label>
+                                <input type="number" class="form-control" id="circumferintaTalie" placeholder="cm">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="circumferintaSold">Sold</label>
+                                <input type="number" class="form-control" id="circumferintaSold" placeholder="cm">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="circumferintaPiept">Piept</label>
+                                <input type="number" class="form-control" id="circumferintaPiept" placeholder="cm">
+                            </div>
+                        </div>
+                        <h4>Lungime</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="lungimeSpate">Spate</label>
+                                <input type="number" class="form-control" id="lungimeSpate" placeholder="cm">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lungimeFata">Fata</label>
+                                <input type="number" class="form-control" id="lungimeFata" placeholder="cm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ngbAutofocus class="btn btn-focus" (click)="modal.close('Ok click')">Ok</button>
+                        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                    </div>
+                  </ng-template>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="space photo" *ngIf="isUploaded">
+        <div class="upload">
+            <img [src]="this.url">
+        </div>
+    </div>
+</section>
+
+
+
+
+
+        <!-- <div class="space">
+            <div class="canva-container" *ngIf="!completeForm">
+                <canvas id="canvas" width=500 height=500></canvas>   
+            </div>
+            
+            <div class="canva-container form-container" *ngIf="completeForm">
+                <form>
+                    <input type="text" class="input" id="typeGarment" [(ngModel)]="typeGarment" required name="typeGarment" placeholder="type">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Choose garment</option>
+                        <option value="rochie">Rochie</option>
+                        <option value="bluza">Bluza</option>
+                        <option value="fusta">Fusta</option>
+                      </select>
+                    <input class="btn" value="Register" (click)="uploadFile()" type="submit"
+                    name="submitButton"/>
+                </form>
+            </div>
+
+            <div class="divs">
+                <div class="div-button">
+                    <button class="btn" (click)="draw()">Genereaza tipar</button>
+                </div>
+                <div class="div-button">
+                    <button class="btn" (click)="download()">Descarca tipar</button>
+                </div>
+            </div>
+        </div> -->
+        
+        
+
+

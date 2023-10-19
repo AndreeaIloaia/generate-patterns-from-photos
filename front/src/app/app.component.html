@@ -1,0 +1,22 @@
+<section>
+  <div class="header" *ngIf="this.router.url !== '/404' && this.router.url !== '/register' && this.router.url !== '/login'">
+    <app-nav></app-nav>
+  </div>
+  <div class="containerapp" >
+    <router-outlet></router-outlet>
+  </div>
+</section>
+<!-- <section *ngIf="this.router.url !== '/login' && this.router.url !== '/register'">
+  <div class="header" *ngIf="this.router.url !== '/404' && this.router.url !== '/register' && this.router.url !== '/login'">
+    <div >
+        <app-nav></app-nav>
+    </div>
+  </div>
+
+  <div class="containerapp">
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+</section> -->
+

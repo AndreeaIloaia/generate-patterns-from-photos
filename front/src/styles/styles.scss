@@ -1,0 +1,10 @@
+@import "variables";
+
+body {
+  margin: -112px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: $background;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
